@@ -15,7 +15,7 @@ class OrderController {
     @Autowired
     lateinit var orderService: OrderService
 
-    @GetMapping("/")
+    @GetMapping
     fun index(): String {
         return "index"
     }
