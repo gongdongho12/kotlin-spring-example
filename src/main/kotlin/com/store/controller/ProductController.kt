@@ -1,6 +1,7 @@
 package com.store.controller
 
 import com.store.domain.Product
+import com.store.java.utils.CommonUtils
 import com.store.service.ProductService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -13,6 +14,9 @@ class ProductController {
     @Autowired
     lateinit var productService: ProductService
 
+    @Autowired
+    lateinit var cu: CommonUtils
+
     @PostMapping
     fun create(@RequestBody product: Product): ResponseEntity<Product> {
         val result = productService.save(product)
@@ -21,6 +25,11 @@ class ProductController {
                 .buildAndExpand(result.id)
                 .toUri()
         return ResponseEntity.created(location).build()
+    }
+
+    @GetMapping("/test")
+    fun test(): ResponseEntity<String> {
+        return ResponseEntity.ok(cu.data)
     }
 
     @GetMapping("/{product_id}")

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
+import java.util.*
 
 @RestController
 @RequestMapping("/api/product_option_items")
@@ -24,8 +25,8 @@ class ProductOptionItemController {
     }
 
     @GetMapping("/{product_option_item_id}")
-    fun show(@PathVariable("product_option_item_id") productOptionItemId: Long): ResponseEntity<ProductOptionItem> {
-        val product = productOptionItemService.findById(productOptionItemId).orElseThrow()
+    fun show(@PathVariable("product_option_item_id") productOptionItemId: Long): ResponseEntity<Optional<ProductOptionItem>> {
+        val product = productOptionItemService.findById(productOptionItemId)
         return ResponseEntity.ok(product)
     }
 
